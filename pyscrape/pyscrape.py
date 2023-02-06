@@ -12,7 +12,7 @@ soup = BeautifulSoup(page.content, 'html.parser')
 #get link URL, then parse link URL and extract data that way. 
 lists = soup.find_all('div', class_="profile-card__data") #use underscore or it looks for python class.
 counter = 0
-with open('leads.csv', 'w', encoding='utf8', newline='') as f:
+with open('leads.csv', 'a', encoding='utf8', newline='') as f:
     thewriter = writer(f)
     header = ['Company', 'Commodity', 'City', 'State', 'Phone', 'Website', 'Last Name']
     thewriter.writerow(header)
