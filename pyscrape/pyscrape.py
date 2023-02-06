@@ -3,8 +3,8 @@ import requests
 from csv import writer
 
 base_url = 'https://www.thomasnet.com/'
-optional_url = 'nsearch.html?cov=UT&heading=8843096&searchsource=suppliers&searchterm=building+materials&searchx=true&what=building+materials&which=prod'
-url = base_url + optional_url
+optional_url = 'nsearch.html?cov=NA&heading=8843096&searchsource=suppliers&searchterm=building+materials&searchx=true&what=building+materials&which=prod'
+url = 'https://www.thomasnet.com/nsearch.html?cov=NA&heading=8843096&searchsource=suppliers&searchterm=building+materials&what=building+materials&which=prod&pg=10'
 
 page = requests.get(url)
 
@@ -14,7 +14,7 @@ lists = soup.find_all('div', class_="profile-card__data") #use underscore or it 
 counter = 0
 with open('leads.csv', 'a', encoding='utf8', newline='') as f:
     thewriter = writer(f)
-    header = ['Company', 'Commodity', 'City', 'State', 'Phone', 'Website', 'Last Name']
+    header = ['Company', 'Commodity', 'City', 'State', 'Phone', 'Website', 'Last Name', 'Lead Type']
     thewriter.writerow(header)
     for list in lists:
         counter+=1
@@ -40,7 +40,8 @@ with open('leads.csv', 'a', encoding='utf8', newline='') as f:
         phone_number = phone_span[1].text
         website_link = company_h1.find('a').get("href")
         last_name = company_name
-        info = [company_name, commodity_name, city_name, state_name, phone_number, website_link, last_name]
+        lead_type = 'Unknown'
+        info = [company_name, commodity_name, city_name, state_name, phone_number, website_link, last_name, lead_type]
         thewriter.writerow(info)
         #print(company_name, commodity_name, city_name, state_name, phone_number, website_link)
         print(str(counter) + " grabbing " + str(company_name))
