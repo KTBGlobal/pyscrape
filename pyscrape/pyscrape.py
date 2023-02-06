@@ -43,4 +43,4 @@ with open('leads.csv', 'w', encoding='utf8', newline='') as f:
         info = [company_name, commodity_name, city_name, state_name, phone_number, website_link, last_name]
         thewriter.writerow(info)
         #print(company_name, commodity_name, city_name, state_name, phone_number, website_link)
-        print(counter)
+        print(str(counter) + " grabbing " + str(company_name))
